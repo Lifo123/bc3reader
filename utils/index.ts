@@ -1,5 +1,4 @@
-export const validRegisterType = /^[VKCDYRTPLQJWGEOXMNIABF]$/;
 
-export * from './parseHeader';
+export * from './bc3_JSON/index'
 
-export * from './parseConcept'
+export * from './Helpers/index'

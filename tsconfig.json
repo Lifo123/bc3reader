@@ -15,7 +15,6 @@
   },
   "exclude": [
     "**/errors.ts",
-    "**/*.test.ts",
     "dist",
     "vitest.config.ts",
     "eslint.config.ts",

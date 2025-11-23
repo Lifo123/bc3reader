@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "A package to read BC3 files in Javascript",
   "scripts": {
-    "dev": "tsx watch parse/bc3_JSON.ts"
+    "dev": "tsx watch test/Front.test.ts"
   },
   "keywords": [],
   "author": "Lifo123",
