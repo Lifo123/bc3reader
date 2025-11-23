@@ -1,13 +1,13 @@
 import type { Bc3RawData } from '../types/BC3.types';
 import {
-  getHeaderInfo,
-  getConcepts,
-  getDescomposition,
-  getTexts,
-  getMeasurements,
-  getTechnicalInfo,
-  getResiduals,
-  getAttachments
+  parseHeader,
+  parseConcepts,
+  parseDescomposition,
+  parseTexts,
+  parseMeasurements,
+  parseTechnicalInfo,
+  parseResiduals,
+  parseAttachments
 } from '../utils/bc3_JSON/index';
 
 export function parseBC3(buffer: Uint8Array) {
@@ -21,22 +21,53 @@ export function parseBC3(buffer: Uint8Array) {
     texts: {},
     measurements: {},
 
-    technicalInfo: {},
+    technicalInfo: { ref: {}, values: {} },
     residuals: {},
     attachments: {},
   };
 
   const lines = content.split('~');
 
-  data.info = getHeaderInfo(lines);
-  data.concepts = getConcepts(lines);
-  data.decompositions = getDescomposition(lines)
-  data.texts = getTexts(lines);
-  data.measurements = getMeasurements(lines);
+  for (let i = 0; i < lines.length; i++) {
+    const lineItems = lines[i].split('|');
+    const recordType = lineItems[0].toUpperCase();
 
-  data.technicalInfo = getTechnicalInfo(lines);
-  data.residuals = getResiduals(lines);
-  data.attachments = getAttachments(lines);
+    switch (recordType) {
+      case 'V':
+      case 'K':
+        parseHeader(lineItems, data.info);
+        break;
+      case 'C':
+        parseConcepts(lineItems, data.concepts);
+        break;
+      case 'D':
+      case 'Y':
+        parseDescomposition(lineItems, data.decompositions);
+        break;
+      case 'T':
+      case 'P':
+        parseTexts(lineItems, data.texts);
+        break;
+      case 'M':
+      case 'N':
+        parseMeasurements(lineItems, data.measurements);
+        break;
+
+      case 'X':
+        parseTechnicalInfo(lineItems, data.technicalInfo);
+        break;
+      case 'R':
+        parseResiduals(lineItems, data.residuals);
+        break;
+      case 'F':
+      case 'G':
+        parseAttachments(lineItems, data.attachments);
+        break;
+
+      default:
+        break;
+    }
+  }
 
   return data
 }

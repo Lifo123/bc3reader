@@ -2,16 +2,16 @@ import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
   test: {
-    include: ['deep-map/**/*.test.ts'],
+    include: ['test/**/*.test.ts'],
 
     coverage: {
       provider: 'v8',
       reporter: ['text', 'html'],
-      include: ['deep-map/**/*.ts'],
+      include: ['test/**/*.ts'],
       exclude: [
-        'deep-map/**/*.test.ts',
-        'deep-map/**/*.d.ts',
-        'deep-map/errors.ts'
+        'test/**/*.test.ts',
+        'test/**/*.d.ts',
+        'test/errors.ts'
       ],
     },
   },

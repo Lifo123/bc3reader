@@ -1,9 +1,9 @@
-export * from './getHeader';
-export * from './getConcepts';
-export * from './getDescomposition';
-export * from './getTexts';
-export * from './getMeasurements';
+export * from './parseHeader';
+export * from './parseConcepts';
+export * from './parseDescomposition';
+export * from './parseTexts';
+export * from './parseMeasurements';
 
-export * from './getTechnical_info';
-export * from './getResiduals';
-export * from './getAttachments';
+export * from './parseTechnical_info';
+export * from './parseResiduals';
+export * from './parseAttachments';

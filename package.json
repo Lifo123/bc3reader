@@ -3,11 +3,33 @@
   "version": "0.0.1",
   "description": "A package to read BC3 files in Javascript",
   "scripts": {
-    "dev": "tsx watch test/Front.test.ts"
+    "build": "tsc",
+    "dev": "tsx watch test/Front.ts",
+    "test:lint": "eslint .",
+    "test:types": "check-dts",
+    "test:coverage": "vitest run --coverage",
+    "test": "pnpm run /^test:/"
   },
   "keywords": [],
-  "author": "Lifo123",
+  "author": "Lifo123 <albertolifo@gmail.com>",
+  "repository": "https://github.com/Lifo123/BC3formatter",
   "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "engines": {
+    "node": "^20.0.0 || >=22.0.0"
+  },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
     "@types/node": "^24.10.1",
